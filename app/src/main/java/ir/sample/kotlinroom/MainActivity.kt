@@ -1,24 +1,24 @@
 package ir.sample.kotlinroom
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.snackbar.Snackbar
+import ir.sample.kotlinroom.roomLayer.AppDatabase
 import ir.sample.kotlinroom.roomLayer.entities.UserEntity
-
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+    val context = this
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
+        test();
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+                .setAction("Action", null).show()
 
         }
     }
@@ -37,5 +37,26 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    fun test() {
+        val db: AppDatabase = AppDatabase.getInstance(context)
+// Test : Insert New Record To Database
+/*
+        val userSampleInsert = UserEntity("Admin", "Admin@gmail.com", "09112223344")
+        db.user().insert(userSampleInsert)
+        val dbGetAllData =  db.user().getAll();
+*/
+
+
+// Test : Update One Record From Database
+/*
+        val userSampleInsert = UserEntity(1,"John","John@gmail.com","09012223344")
+        db.user().update(userSampleInsert)
+        val dbGetAllData =  db.user().getAll();
+*/
+
+        val dbGetData =  db.user().getById(1);
+
     }
 }
